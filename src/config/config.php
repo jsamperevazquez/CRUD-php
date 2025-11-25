@@ -5,7 +5,7 @@
 
 return [
     'db' => [
-        'host' => 'db',
+        'host' => 'mysql-db',
         'name' => 'gestion_proyectos',
         'user' => 'user',
         'pass' => 'userpass',

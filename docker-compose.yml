@@ -1,10 +1,10 @@
 version: "3.9" # optional since v1.27.0
 services:
-  web:
-    image: php:8.2-apache
-    container_name: php-app
+  php-apache:
+    build: .
     volumes:
-      - ./src:/var/www/html/
+      - ./src:/var/www/html
+      - ./apache/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
     ports:
       - "8080:80"
     depends_on:
@@ -14,7 +14,7 @@ services:
     container_name: mysql-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: gestion_proyectos
       MYSQL_USER: user
       MYSQL_PASSWORD: userpass
@@ -25,7 +25,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: pma 
+    container_name: pma
     restart: always
     ports:
       - "8081:80"
