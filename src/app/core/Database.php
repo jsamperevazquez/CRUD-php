@@ -10,8 +10,7 @@ class Database{
     private static $pdo = null;
 
     /**
-     * Function to create a new connection to database 
-     * @throws Exception if connection fails
+     * Function to create a new connection to database or return the existing one
      * @return PDO|null 
      */
     public static function getConnection(){
@@ -23,7 +22,7 @@ class Database{
 
             try{
                 self::$pdo = new PDO(
-                    $dns,
+                    $dsn,
                     $db['username'],
                     $db['password'],
                     [ // PDO options
@@ -34,7 +33,7 @@ class Database{
 
                     );
             } catch(PDOException $e){
-                throw new Exception('Database connection error: ' . $e->getMessage());
+                die('Database connection error: ' . $e->getMessage());
             }
         return self::$pdo; // return the unique instance
         
